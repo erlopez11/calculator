@@ -9,7 +9,6 @@
 
 body {
     background-color: #EBE2DC;
-    border: 1px solid red;
     font-size: 100%;
     min-height: 100vh;
     display: flex;
@@ -55,6 +54,17 @@ body {
     width: 90%;
     height: 16%;
     border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    padding-right: 20px;
+}
+
+.screen div {
+    color: #303030;
+    font-family: 'Inter', sans-serif;
+    font-size: 26px;
 }
 
 button {
