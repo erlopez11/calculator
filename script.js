@@ -1,9 +1,26 @@
-// Addition
-function add(num1, num2) { //adds only 2 numbers
-    return num1 + num2;
-};
+//Buttons and Variables
 
-function addAll(...args) { //adds list of multiple numbers; this misght be the better option?
+const display = document.querySelector('.bottomScreen');
+const buttons = document.querySelector('.buttons_group');
+const numberBtn = document.querySelector('.number')
+//display.innerHTML = numberBtn.value;
+
+buttons.addEventListener('click', (e) => {
+    const key = e.target;
+    const numberContent = key.textContent;
+    if (e.target.matches('.number')) {
+        return display.textContent = numberContent;
+    }
+})
+
+
+
+
+//Functions for Basic Math Operators
+
+// Addition
+
+function add(...args) { 
     let sum = 0;
     for (let i = 0; i < args.length; i++) {
         sum += args[i];
@@ -12,11 +29,8 @@ function addAll(...args) { //adds list of multiple numbers; this misght be the b
 }
 
 //Subtraction
-function subtract(num1, num2) {//subtracts only 2 numbers
-    return num1 - num2;
-}
 
-function subtraction(...args) {//subtracts list of multiple numbers; better option?
+function subtract(...args) {
     let difference = args[0];
     for (let i = 1; i < args.length; i++) {
         difference -= args[i];
@@ -25,6 +39,7 @@ function subtraction(...args) {//subtracts list of multiple numbers; better opti
 }
 
 //Multiplication
+
 function multiply(...args) {
     let product = 1;
     for (let i = 0; i < args.length; i++) {
@@ -34,11 +49,8 @@ function multiply(...args) {
 }
 
 //Division
-function division(num1, num2) {// only two numbers
-    return num1/num2;
-}
 
-function divisionAll(...args) { // list of multiple numbers/rules for use of 0?
+function divide(...args) {
     let quotient = args[0];
     for (let i = 1; i < args.length; i++) {
         if (quotient === 0) {
@@ -52,5 +64,27 @@ function divisionAll(...args) { // list of multiple numbers/rules for use of 0?
     return quotient;
 }
 
-console.log(division(9, 3));
-console.log(divisionAll(0, 5, 8, 9, 0));
+
+//Calculator Function (For Single Operatos)
+
+function operate(numA, operator, numB) {
+    switch(operator) {
+        case '+':
+            return add(numA, numB);
+            break;
+        case '-':
+            return subtract(numA, numB);
+            break;
+        case '*':
+            return multiply(numA, numB);
+            break;
+        case '/':
+            return divide(numA, numB);
+            break;
+        default:
+            return 'Please select a math operator';
+            break;
+    }
+}
+
+console.log(operate(100, '+', 100));
