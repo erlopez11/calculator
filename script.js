@@ -1,34 +1,55 @@
 //Buttons and Variables
 
 const display = document.querySelector('.bottomScreen');
+const displayTop = document.querySelector('.topScreen');
 const buttons = document.querySelector('.buttons_group');
-const numberBtn = document.querySelector('.number')
-//display.innerHTML = numberBtn.value;
+
+const operator = document.querySelector('.operator');
+const number = document.querySelector('.number');
+const equal = document.querySelector('.equal');
+const clear = document.querySelector('.clear');
+const backspace = document.querySelector('.material-symbols-outlined');
+const decimal = document.querySelector('.decimal');
+
+
 
 //Button Function
 
 buttons.addEventListener('click', (e) => {
-    const key = e.target;
-    const buttonContent = key.textContent;
-    const numberDisplayed = display.textContent;
+    const key = e.target; //button pressed
+    const buttonContent = key.textContent; //text of pressed button
+    const numberDisplayed = display.textContent; // number or operator displayed
+
     if (e.target.matches('.number')) {
         if (numberDisplayed === '0') {
+            displayTop.textContent += buttonContent;
             return display.textContent = buttonContent;
         } else {
             return display.textContent = numberDisplayed + buttonContent;
         }
-    } else if (e.target.matches('.operator')) {
+    } else if (e.target.matches('.decimal')) {
+        if (!numberDisplayed.includes('.')) {
+            return display.textContent = numberDisplayed + buttonContent;
+        }
+    }
+});
+
+ displayTop.textContent = ''
+
+
+
+
+   /* } else if (e.target.matches('.operator')) {
         return display.textContent = buttonContent;
     } else if (e.target.matches('.decimal')) {
-        return display.textContent = buttonContent;
+        return display.textContent = numberDisplayed + buttonContent;
     } else if (e.target.matches('.equal')) {
         return display.textContent = buttonContent;
     } else if (e.target.matches('.clear')) {
         return display.textContent = buttonContent;
     } else if (e.target.matches('.backspace')) {
         return display.textContent = buttonContent;
-    }
-})
+    }*/
 
 
 
@@ -145,4 +166,3 @@ function operate(numA, operator, numB) {
     }
 }
 
-console.log(operate(100, '+', 100));
