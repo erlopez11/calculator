@@ -5,13 +5,71 @@ const buttons = document.querySelector('.buttons_group');
 const numberBtn = document.querySelector('.number')
 //display.innerHTML = numberBtn.value;
 
+//Button Function
+
 buttons.addEventListener('click', (e) => {
     const key = e.target;
-    const numberContent = key.textContent;
+    const buttonContent = key.textContent;
+    const numberDisplayed = display.textContent;
     if (e.target.matches('.number')) {
-        return display.textContent = numberContent;
+        if (numberDisplayed === '0') {
+            return display.textContent = buttonContent;
+        } else {
+            return display.textContent = numberDisplayed + buttonContent;
+        }
+    } else if (e.target.matches('.operator')) {
+        return display.textContent = buttonContent;
+    } else if (e.target.matches('.decimal')) {
+        return display.textContent = buttonContent;
+    } else if (e.target.matches('.equal')) {
+        return display.textContent = buttonContent;
+    } else if (e.target.matches('.clear')) {
+        return display.textContent = buttonContent;
+    } else if (e.target.matches('.backspace')) {
+        return display.textContent = buttonContent;
     }
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
