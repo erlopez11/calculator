@@ -1,74 +1,63 @@
 //Buttons and Variables
 
-const display = document.querySelector('.bottomScreen');
-const displayTop = document.querySelector('.topScreen');
+const currentNumber = document.querySelector('.bottomScreen');
+const numberHistory = document.querySelector('.topScreen');
 const buttons = document.querySelector('.buttons_group');
 
-const operator = document.querySelector('.operator');
-const number = document.querySelector('.number');
+const operator = document.querySelectorAll('.operator');
+const number = document.querySelectorAll('.number');
 const equal = document.querySelector('.equal');
 const clear = document.querySelector('.clear');
 const backspace = document.querySelector('.material-symbols-outlined');
 const decimal = document.querySelector('.decimal');
 
+let firstOperand = '';
+let secondOperand = '';
+let currentOperator = ''; 
 
 
-//Button Function
 
-buttons.addEventListener('click', (e) => {
-    const key = e.target; //button pressed
-    const buttonContent = key.textContent; //text of pressed button
-    const numberDisplayed = display.textContent; // number or operator displayed
 
-    if (e.target.matches('.number')) {
-        if (numberDisplayed === '0') {
-            displayTop.textContent += buttonContent;
-            return display.textContent = buttonContent;
-        } else {
-            return display.textContent = numberDisplayed + buttonContent;
-        }
-    } else if (e.target.matches('.decimal')) {
-        if (!numberDisplayed.includes('.')) {
-            return display.textContent = numberDisplayed + buttonContent;
-        }
-    }
+//Button Functions
+
+//Display Numbers in Current Number Area
+
+number.forEach(function(btnNum) {
+    btnNum.addEventListener('click', () => appendNum(btnNum.textContent))
 });
 
- displayTop.textContent = ''
+function appendNum(number) {
+    let numberDisplayed = currentNumber.textContent;
+    if (numberDisplayed === '0') {
+        currentNumber.textContent = number;
+    } else {
+        currentNumber.textContent = numberDisplayed + number;
+    }
+}
 
+//Display Decimal Point
 
+decimal.addEventListener('click', appendDecimal);
 
+function appendDecimal(point) {
+    if (!currentNumber.textContent.includes('.')) {
+        return currentNumber.textContent += '.';
+    }
+}
 
-   /* } else if (e.target.matches('.operator')) {
-        return display.textContent = buttonContent;
-    } else if (e.target.matches('.decimal')) {
-        return display.textContent = numberDisplayed + buttonContent;
-    } else if (e.target.matches('.equal')) {
-        return display.textContent = buttonContent;
-    } else if (e.target.matches('.clear')) {
-        return display.textContent = buttonContent;
-    } else if (e.target.matches('.backspace')) {
-        return display.textContent = buttonContent;
-    }*/
+//Display and Save Operator with the First Operand
 
+operator.forEach(function(operatorBtn) {
+    operatorBtn.addEventListener('click', () => startOperator(operatorBtn.textContent))
+});
 
+function startOperator(selection) {
+    firstOperand += currentNumber.textContent;
+    currentOperator += selection;
+    numberHistory.textContent = `${firstOperand} ${currentOperator}`;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//Display the Second Operand and number history from previous step
 
 
 
