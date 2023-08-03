@@ -20,58 +20,60 @@ let currentOperator = '';
 
 
 
-//Button Functions
+//Numbers Button Functions
 
-//Display Numbers in Current Number Area
+number.forEach(button => {
+    button.addEventListener('click', () => displayNumbers(button.textContent))
+}) 
 
-number.forEach(function(btnNum) {
-    btnNum.addEventListener('click', () => appendNum(btnNum.textContent))
-});
-
-function appendNum(number) {
+function displayNumbers(number) {
     let numberDisplayed = currentNumber.textContent;
-    const previousKeyType = screen.dataset.previousKeyType;
-
-    if (numberDisplayed === '0' || previousKeyType === 'operator') {
+    //let historyDisplayed = numberHistory.textContent;
+    if (numberDisplayed === '0') {
         currentNumber.textContent = number;
     } else {
         currentNumber.textContent = numberDisplayed + number;
     }
 }
 
-//Display Decimal Point
+//Decimal Button
+decimal.addEventListener('click', addDecimal);
 
-decimal.addEventListener('click', appendDecimal);
-
-function appendDecimal(point) {
-    if (!currentNumber.textContent.includes('.')) {
-        return currentNumber.textContent += '.';
+function addDecimal() {
+    if(!currentNumber.textContent.includes('.')) {
+        currentNumber.textContent += '.';
     }
 }
 
-//Display and Save Operator with the First Operand
+//Operator Button
+operator.forEach(button => {
+    button.addEventListener('click', () => addOperator(button.textContent))
+})
 
-operator.forEach(function(operatorBtn) {
-    operatorBtn.addEventListener('click', () => startOperator(operatorBtn.textContent))
-});
-
-function startOperator(selection) {
+function addOperator(operation) {
+    currentOperator += operation;
     firstOperand += currentNumber.textContent;
-    currentOperator += selection;
     numberHistory.textContent = `${firstOperand} ${currentOperator}`;
-    screen.dataset.previousKeyType = 'operator';
-    getSecondOperand();  
+    getSecondOperand();
+    console.log(firstOperand);
+    console.log(secondOperand);
+
 }
 
-//Display the Second Operand and number history from previous step
-
+//The Second Operand
 function getSecondOperand() {
-        secondOperand += currentNumber.textContent;
-        console.log(currentNumber.textContent);
-        console.log(firstOperand);
-        console.log(secondOperand);
-
+    if (numberHistory.textContent.includes('+') || numberHistory.textContent.includes('-') ||numberHistory.textContent.includes('x') || numberHistory.textContent.includes('÷') ) {
+        resetCurrentNum();
+    }
 }
+
+function resetCurrentNum() {
+    currentNumber.textContent = '';
+    secondOperand += currentNumber.textContent;
+}
+
+console.log(firstOperand);
+console.log(secondOperand);
 
 
 
