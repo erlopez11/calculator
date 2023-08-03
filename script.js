@@ -3,6 +3,8 @@
 const currentNumber = document.querySelector('.bottomScreen');
 const numberHistory = document.querySelector('.topScreen');
 const buttons = document.querySelector('.buttons_group');
+const screen = document.querySelector('.screen');
+
 
 const operator = document.querySelectorAll('.operator');
 const number = document.querySelectorAll('.number');
@@ -28,7 +30,9 @@ number.forEach(function(btnNum) {
 
 function appendNum(number) {
     let numberDisplayed = currentNumber.textContent;
-    if (numberDisplayed === '0') {
+    const previousKeyType = screen.dataset.previousKeyType;
+
+    if (numberDisplayed === '0' || previousKeyType === 'operator') {
         currentNumber.textContent = number;
     } else {
         currentNumber.textContent = numberDisplayed + number;
@@ -55,11 +59,19 @@ function startOperator(selection) {
     firstOperand += currentNumber.textContent;
     currentOperator += selection;
     numberHistory.textContent = `${firstOperand} ${currentOperator}`;
+    screen.dataset.previousKeyType = 'operator';
+    getSecondOperand();  
 }
 
 //Display the Second Operand and number history from previous step
 
+function getSecondOperand() {
+        secondOperand += currentNumber.textContent;
+        console.log(currentNumber.textContent);
+        console.log(firstOperand);
+        console.log(secondOperand);
 
+}
 
 
 
