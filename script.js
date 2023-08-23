@@ -13,23 +13,29 @@ const clear = document.querySelector('.clear');
 const backspace = document.querySelector('.material-symbols-outlined');
 const decimal = document.querySelector('.decimal');
 
+let resetScreen = false;
 let firstOperand = '';
 let secondOperand = '';
 let currentOperator = ''; 
 
 
-
-
-//Numbers Button Functions
-
+//Event Listeners
 number.forEach(button => {
     button.addEventListener('click', () => displayNumbers(button.textContent))
 }) 
+decimal.addEventListener('click', addDecimal);
+operator.forEach(button => {
+    button.addEventListener('click', () => addOperator(button.textContent))
+})
+equal.addEventListener('click', evaluate);
 
+
+
+//Numbers Button Functions
 function displayNumbers(number) {
     let numberDisplayed = currentNumber.textContent;
-    //let historyDisplayed = numberHistory.textContent;
-    if (numberDisplayed === '0') {
+    if (currentNumber.textContent === '0' || resetScreen) {
+        reset();
         currentNumber.textContent = number;
     } else {
         currentNumber.textContent = numberDisplayed + number;
@@ -37,43 +43,56 @@ function displayNumbers(number) {
 }
 
 //Decimal Button
-decimal.addEventListener('click', addDecimal);
-
 function addDecimal() {
     if(!currentNumber.textContent.includes('.')) {
         currentNumber.textContent += '.';
     }
 }
 
-//Operator Button
-operator.forEach(button => {
-    button.addEventListener('click', () => addOperator(button.textContent))
-})
+//Reset
+function reset() {
+    currentNumber.textContent = '';
+    resetScreen = false;
+}
 
+//Operator Button
 function addOperator(operation) {
     currentOperator += operation;
     firstOperand += currentNumber.textContent;
     numberHistory.textContent = `${firstOperand} ${currentOperator}`;
-    getSecondOperand();
-    console.log(firstOperand);
-    console.log(secondOperand);
-
+    resetScreen = true;
 }
 
-//The Second Operand
-function getSecondOperand() {
-    if (numberHistory.textContent.includes('+') || numberHistory.textContent.includes('-') ||numberHistory.textContent.includes('x') || numberHistory.textContent.includes('÷') ) {
-        resetCurrentNum();
+//Second operand
+function evaluate() {
+    secondOperand += currentNumber.textContent
+    operate(currentOperator, firstOperand, secondOperand);
+    numberHistory.textContent = `${firstOperand} ${currentOperator} ${secondOperand} =`;
+}
+
+function operate(operator, a, b) {
+    a = Number(a);
+    b = Number(b);
+
+    switch(operator) {
+        case '+' :
+            return a + b;
+        case '-' :
+            return a - b;
+        case 'x' :
+            return a * b;
+        case '÷' :
+            if (b === 0) {
+                return null;
+            } else {
+                return a / b;
+            }
+        default :
+            return null;
     }
 }
 
-function resetCurrentNum() {
-    currentNumber.textContent = '';
-    secondOperand += currentNumber.textContent;
-}
 
-console.log(firstOperand);
-console.log(secondOperand);
 
 
 
