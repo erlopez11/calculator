@@ -63,59 +63,36 @@ function addOperator(operation) {
     resetScreen = true;
 }
 
-//Second operand
+//Second operand and Complete Operation
 function evaluate() {
+    console.log(currentOperator);
+    console.log(typeof currentOperator);
     secondOperand += currentNumber.textContent
-    operate(currentOperator, firstOperand, secondOperand);
+    currentNumber.textContent = operate(currentOperator, firstOperand, secondOperand);
     numberHistory.textContent = `${firstOperand} ${currentOperator} ${secondOperand} =`;
 }
-
+//Math Operation
 function operate(operator, a, b) {
-    a = Number(a);
-    b = Number(b);
-
+    numA = Number(a);
+    numB = Number(b);
     switch(operator) {
-        case '+' :
-            return a + b;
-        case '-' :
-            return a - b;
-        case 'x' :
-            return a * b;
-        case '÷' :
-            if (b === 0) {
-                return null;
-            } else {
-                return a / b;
-            }
-        default :
-            return null;
+        case '+':
+            return add(numA, numB);
+            break;
+        case '-':
+            return subtract(numA, numB);
+            break;
+        case 'x':
+            return multiply(numA, numB);
+            break;
+        case '÷':
+            return divide(numA, numB);
+            break;
+        default:
+            return 'Please select a math operator';
+            break;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //Functions for Basic Math Operators
 
@@ -164,27 +141,3 @@ function divide(...args) {
     }
     return quotient;
 }
-
-
-//Calculator Function (For Single Operatos)
-
-function operate(numA, operator, numB) {
-    switch(operator) {
-        case '+':
-            return add(numA, numB);
-            break;
-        case '-':
-            return subtract(numA, numB);
-            break;
-        case '*':
-            return multiply(numA, numB);
-            break;
-        case '/':
-            return divide(numA, numB);
-            break;
-        default:
-            return 'Please select a math operator';
-            break;
-    }
-}
-
