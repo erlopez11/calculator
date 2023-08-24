@@ -28,7 +28,7 @@ operator.forEach(button => {
     button.addEventListener('click', () => addOperator(button.textContent))
 })
 equal.addEventListener('click', evaluate);
-
+clear.addEventListener('click', clearAll);
 
 
 //Numbers Button Functions
@@ -49,18 +49,28 @@ function addDecimal() {
     }
 }
 
-//Reset
-function reset() {
-    currentNumber.textContent = '';
-    resetScreen = false;
-}
-
 //Operator Button
 function addOperator(operation) {
     currentOperator += operation;
     firstOperand += currentNumber.textContent;
     numberHistory.textContent = `${firstOperand} ${currentOperator}`;
     resetScreen = true;
+}
+
+//Clear All Button
+
+function clearAll() {
+    numberHistory.textContent = '';
+    currentNumber.textContent = '0';
+    currentOperator = '';
+    firstOperand = '';
+    secondOperand = '';
+}
+
+//Reset
+function reset() {
+    currentNumber.textContent = '';
+    resetScreen = false;
 }
 
 //Second operand and Complete Operation
