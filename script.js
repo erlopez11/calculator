@@ -29,6 +29,7 @@ operator.forEach(button => {
 })
 equal.addEventListener('click', evaluate);
 clear.addEventListener('click', clearAll);
+backspace.addEventListener('click', backspaceClear);
 
 
 //Numbers Button Functions
@@ -58,13 +59,18 @@ function addOperator(operation) {
 }
 
 //Clear All Button
-
 function clearAll() {
     numberHistory.textContent = '';
     currentNumber.textContent = '0';
     currentOperator = '';
     firstOperand = '';
     secondOperand = '';
+}
+
+//BackSpace Button
+
+function backspaceClear() {
+    currentNumber.textContent = currentNumber.textContent.toString().slice(0, -1);
 }
 
 //Reset
