@@ -52,10 +52,18 @@ function addDecimal() {
 
 //Operator Button
 function addOperator(operation) {
-    currentOperator += operation;
-    firstOperand += currentNumber.textContent;
-    numberHistory.textContent = `${firstOperand} ${currentOperator}`;
-    resetScreen = true;
+    if (firstOperand !== '' && currentOperator !== '') {
+        currentNumber.textContent = operate(currentOperator, firstOperand, currentNumber.textContent);
+        firstOperand = currentNumber.textContent;
+        currentOperator = operation;
+        numberHistory.textContent = `${firstOperand} ${currentOperator}`;
+        resetScreen= true;
+    } else {
+        currentOperator = operation;
+        firstOperand += currentNumber.textContent;
+        numberHistory.textContent = `${firstOperand} ${currentOperator}`;
+        resetScreen = true;
+    }
 }
 
 //Clear All Button
@@ -81,8 +89,6 @@ function reset() {
 
 //Second operand and Complete Operation
 function evaluate() {
-    console.log(currentOperator);
-    console.log(typeof currentOperator);
     secondOperand += currentNumber.textContent
     currentNumber.textContent = operate(currentOperator, firstOperand, secondOperand);
     numberHistory.textContent = `${firstOperand} ${currentOperator} ${secondOperand} =`;
