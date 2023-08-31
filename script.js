@@ -91,7 +91,7 @@ function reset() {
 function evaluate() {
     if (!numberHistory.textContent.includes('=') && currentOperator !== '') {
         secondOperand = currentNumber.textContent
-        currentNumber.textContent = operate(currentOperator, firstOperand, secondOperand);
+        currentNumber.textContent = roundNumber(operate(currentOperator, firstOperand, secondOperand));
         numberHistory.textContent = `${firstOperand} ${currentOperator} ${secondOperand} =`;
         currentOperator = '';
         firstOperand = '';
@@ -118,6 +118,12 @@ function operate(operator, a, b) {
             return 'Please select a math operator';
             break;
     }
+}
+
+//Round Function
+
+function roundNumber(number) {
+    return Math.round(number * 100000)/100000;
 }
 
 //Functions for Basic Math Operators
