@@ -59,6 +59,7 @@ body {
     align-items: flex-end;
     justify-content: center;
     padding-right: 20px;
+    overflow: hidden;
 }
 
 .screen div {
