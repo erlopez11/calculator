@@ -89,9 +89,13 @@ function reset() {
 
 //Second operand and Complete Operation
 function evaluate() {
-    secondOperand += currentNumber.textContent
-    currentNumber.textContent = operate(currentOperator, firstOperand, secondOperand);
-    numberHistory.textContent = `${firstOperand} ${currentOperator} ${secondOperand} =`;
+    if (!numberHistory.textContent.includes('=') && currentOperator !== '') {
+        secondOperand = currentNumber.textContent
+        currentNumber.textContent = operate(currentOperator, firstOperand, secondOperand);
+        numberHistory.textContent = `${firstOperand} ${currentOperator} ${secondOperand} =`;
+        currentOperator = '';
+        firstOperand = '';
+    }
 }
 //Math Operation
 function operate(operator, a, b) {
